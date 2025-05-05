@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+.signupForm{
+  background-color: rgb(255, 255, 255,0.2);
+  color: black;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.slogan{
+  background-image: linear-gradient(to right,white,black,white);
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  text-shadow: 10px 10px 10px black;
+}
