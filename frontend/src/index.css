@@ -1,14 +1,28 @@
 @import "tailwindcss";
 
+.signUpPage{
+  background-image: linear-gradient(rgb(0, 0, 0,0.5),rgb(0, 0, 0,0.8)), url(https://www.pixelstalk.net/wp-content/uploads/image10/Cool-Dragon-Wallpaper-1920x1080-HD.jpg);
+}
 .signupForm{
-  background-color: rgb(255, 255, 255,0.2);
+  background-color: rgb(255, 255, 255,0.3);
   color: black;
   font-weight: 600;
   backdrop-filter: blur(10px);
+
+}
+.signupForm label{
+  background-image: linear-gradient(to right,white,white);
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  text-shadow: 10px 10px 10px black;
+}
+.signupForm input{
+  border-color: white;
 }
 
 .slogan{
-  background-image: linear-gradient(to right,white,black,white);
+  background-image: linear-gradient(to right,white,white);
   background-clip: text;
   color: transparent;
   font-weight: 600;

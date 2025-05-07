@@ -43,6 +43,7 @@ const registerUser = async (req, res) => {
 
 
 const loginUser = async (req, res) => {
+  try {
     const {email , password}   = req.body;
     if (!email) {
         return res.status(401).json({ msg: "email is required" });
@@ -69,6 +70,9 @@ const loginUser = async (req, res) => {
       else{
         res.status(401).json({msg:"user not found please register"})
       }
+  } catch (error) {
+    res.status(500).json({error:error.message})
+  }
 };
 
 // body ,  params , query , headers--> tokens

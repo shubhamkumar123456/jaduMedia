@@ -57,7 +57,7 @@ const Signup = () => {
       }  
   }
   return (
-    <div className='h-[90.6vh] bg-[url(https://www.pixelstalk.net/wp-content/uploads/image10/Cool-Dragon-Wallpaper-1920x1080-HD.jpg)] bg-center bg-cover bg-blue-300 flex lg:flex-row flex-col justify-center items-center gap-2'>
+    <div className='h-[90.6vh] signUpPage  bg-center bg-cover bg-blue-300 flex lg:flex-row flex-col justify-center items-center gap-2'>
         <h1 className='text-2xl slogan font-semibold max-w-[500px]'>Connect with friends and the world around you Share moments. Build memories. Stay connected</h1>
        <form action="" className='signupForm flex flex-col p-8 rounded-xl  gap-2 w-[400px]'>
         <label htmlFor="">Name</label>
