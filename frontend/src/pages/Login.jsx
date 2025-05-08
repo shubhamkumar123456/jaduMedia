@@ -55,6 +55,7 @@ const Login = () => {
         <label htmlFor="">Password</label>
         <input name='password' onChange={handleInputChanger} className='border rounded-md px-4 py-2' type="password" />
 
+        <Link to={'/forgetPassword'} className='text-end font-medium my-2 '>forget password?</Link>
         {/* <label htmlFor="">Confirm Password</label>
         <input className='border rounded-md px-4 py-2' type="password" /> */}
 

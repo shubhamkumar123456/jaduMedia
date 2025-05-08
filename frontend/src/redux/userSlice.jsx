@@ -18,11 +18,17 @@ export const userSlice = createSlice({
         state.login = true;
         state.user = action.payload.user;
         state.token = action.payload.token
+    },
+    logout:(state, action)=>{
+      localStorage.removeItem('jaduMedia')
+      state.login = false;
+      state.user = '';
+      state.token = ''
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setState } = userSlice.actions
+export const { setState , logout } = userSlice.actions
 
 export default userSlice.reducer

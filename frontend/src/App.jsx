@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import { ToastContainer } from 'react-toastify'
 import FormikLogin from './pages/FormikLogin'
 import { useSelector } from 'react-redux'
+import ForgetPassword from './pages/ForgetPassword'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
               <Route path='/' element={login===true ? <Home/> : <Navigate to={'/login'}/>}/>
               <Route path='/signup' element={login===false ? <Signup/> : <Navigate to={'/'}/>}/>
               <Route path='/login' element={login===false ? <Login/> : <Navigate to={'/'}/>}/>
+              <Route path='/forgetPassword' element={login===false ? <ForgetPassword/> : <Navigate to={'/'}/>}/>
           </Routes>
           <ToastContainer/>
       </BrowserRouter>

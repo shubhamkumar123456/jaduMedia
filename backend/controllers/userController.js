@@ -2,6 +2,8 @@ import userCollection from "../models/userCollection.js";
 import bcrypt from "bcryptjs";
 const salt = bcrypt.genSaltSync(10);
 import jwt from 'jsonwebtoken'
+import nodemailer from "nodemailer";
+
 
 const JWT_SECRET = 'Batch10-12SocialApp'
 
@@ -109,7 +111,51 @@ res.status(200).json({msg:"user deleted successfully"})
 
 };
 
-export { registerUser, loginUser, updateUser, deleteUser };
+
+const forgetPassword = async(req,res)=>{
+  
+  try {
+    const {email}  = req.body;
+    let user = await userCollection.findOne({email})
+
+    if(user){
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: "shubhamfarainzi@gmail.com",
+          pass: "nnxc nvxy pady zgse",
+        },
+      });
+      
+      // Wrap in an async IIFE so we can use await.
+      (async () => {
+        const info = await transporter.sendMail({
+          from: 'shubhamfarainzi@gmail.com',
+          to: email,
+          subject: "Reset Password Request",
+          text: "please click the link below to update password \n http://localhost:8090/users/resetPassword/zxcfghjkl ", // plain‑text body
+          
+        });
+      
+        console.log("Message sent:", info.messageId);
+      })();
+
+      res.status(200).json({msg:"please check your email for further information"})
+    }
+    else{
+      return res.status(401).json({msg:"user not found"})
+    }
+  } catch (error) {
+    res.status(500).json({error:error.message})
+  }
+
+}
+
+
+
+export { registerUser, loginUser, updateUser, deleteUser ,forgetPassword };
 
 //  hash  --> not reversable  --> hashing
 //  encrypt --> is reversable  --> token
