@@ -17,7 +17,15 @@ let userSchema = new mongoose.Schema({
         required:[true,'password is required']
     },
 
+
 },{timestamps:true})
+
+userSchema.add({
+    resetPasswordToken:{
+        type:String,
+        default:null
+    }
+})
 
 // const users = mongoose.model('collectionName' , structure)
 const users = mongoose.model('users' , userSchema);

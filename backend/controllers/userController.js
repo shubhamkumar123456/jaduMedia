@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 const salt = bcrypt.genSaltSync(10);
 import jwt from 'jsonwebtoken'
 import nodemailer from "nodemailer";
-
+import randomstring from "randomstring";
 
 const JWT_SECRET = 'Batch10-12SocialApp'
 
@@ -118,7 +118,12 @@ const forgetPassword = async(req,res)=>{
     const {email}  = req.body;
     let user = await userCollection.findOne({email})
 
+
     if(user){
+      let resetToken = randomstring.generate(50)  //fghjkl;;kjhgfyuioptrtyuiop
+      user.resetPasswordToken = resetToken
+      await user.save()
+
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
@@ -135,7 +140,7 @@ const forgetPassword = async(req,res)=>{
           from: 'shubhamfarainzi@gmail.com',
           to: email,
           subject: "Reset Password Request",
-          text: "please click the link below to update password \n http://localhost:8090/users/resetPassword/zxcfghjkl ", // plain‑text body
+          text: `please click the link below to update password \n http://localhost:8090/users/resetPassword/${resetToken}`, // plain‑text body
           
         });
       
