@@ -159,8 +159,51 @@ const forgetPassword = async(req,res)=>{
 }
 
 
+const resetPassword =async (req,res)=>{
+    // res.send("hello world")
 
-export { registerUser, loginUser, updateUser, deleteUser ,forgetPassword };
+    const {resetToken} = req.params
+    console.log(resetToken);
+
+    let user = await userCollection.findOne({resetPasswordToken:resetToken}); 
+
+    if(user){
+      res.render('passResetPage' , {resetToken})
+    }
+    else{
+      res.status(401).json({msg:'token expired'})
+    }
+
+
+ 
+}
+
+
+
+const updatePassword = async(req,res)=>{
+    const {password} = req.body;
+    const {resetToken } = req.params
+
+    let user = await userCollection.findOne({resetPasswordToken:resetToken});  //{id name email password}
+
+    if(user){
+      let hashedPassword = bcrypt.hashSync(password, salt)
+      user.password = hashedPassword
+      user.resetPasswordToken = null
+      await user.save()
+
+      res.status(200).json({msg:"password updated successfully"})
+    }
+    else{
+      res.status(401).json({msg:"token expired"})
+    }
+
+
+}
+
+
+
+export { registerUser, loginUser,updatePassword, updateUser, resetPassword, deleteUser ,forgetPassword };
 
 //  hash  --> not reversable  --> hashing
 //  encrypt --> is reversable  --> token
