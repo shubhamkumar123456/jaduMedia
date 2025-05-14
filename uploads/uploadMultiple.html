@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        img{
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <input multiple onchange="handleChanger(event)" type="file">
+    <button>submit</button>
+
+
+    <script>
+
+        let body = document.querySelector('body')
+        function handleChanger(e){
+            
+            let arr = [...e.target.files]  //[{},{},{}]
+
+            arr.forEach((ele,i)=>{
+                let imageTag = document.createElement('img')
+                let reader = new FileReader();
+
+                reader.readAsDataURL(ele);
+
+                reader.onload = ()=>{
+                    imageTag.src = reader.result
+                    body.append(imageTag)
+                }
+
+                reader.onerror = ()=>{
+                    console.log(reader.error)
+                }
+            })
+            
+            
+            
+        
+
+
+            // let imageTag = document.createElement('img');
+            // imageTag.src = URL.createObjectURL(file)
+
+            // console.log(imageTag)
+
+            body.append(imageTag)
+        }
+    </script>
+</body>
+</html>

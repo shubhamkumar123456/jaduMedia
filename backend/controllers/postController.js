@@ -22,3 +22,6 @@ const deletePost = async (req, res) => {
 };
 
 export { createPost, deletePost };
+
+
+

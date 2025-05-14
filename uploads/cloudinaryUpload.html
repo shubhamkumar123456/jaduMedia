@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input multiple onchange="handleInputChanger(event)" type="file" >
+
+
+    <script>
+
+        // https://api.cloudinary.com/v1_1/<cloud name>/<resource_type>/upload
+        async function handleInputChanger(e){
+            let files = e.target.files
+            console.log(files[0])
+
+            let formData = new FormData();
+            formData.append('file',files[0]);
+            formData.append('upload_preset','social12-2')
+
+            let res = await fetch('https://api.cloudinary.com/v1_1/dsf7eyovf/upload',{
+                method:"POST",
+                body:formData
+            })
+
+            let data = await res.json();
+            console.log(data)
+            console.log(data.secure_url)
+        }
+    </script>
+</body>
+</html>

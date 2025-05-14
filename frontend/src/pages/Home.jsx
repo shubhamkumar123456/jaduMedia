@@ -1,11 +1,10 @@
 import React from 'react'
+import PostUploader from '../components/PostUploader'
 
 const Home = () => {
   return (
     <div>
-      <h1>
-        This is home page
-      </h1>
+    <PostUploader/>
     </div>
   )
 }
