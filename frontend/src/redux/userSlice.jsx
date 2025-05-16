@@ -5,7 +5,8 @@ let userData = JSON.parse(localStorage.getItem('jaduMedia'))
 const initialState = {
   login: userData ? true : false,
   user:userData ? userData.user : '',
-  token: userData ? userData.token : ''
+  token: userData ? userData.token : '',
+  loading:false
 }
 
 export const userSlice = createSlice({
@@ -24,11 +25,14 @@ export const userSlice = createSlice({
       state.login = false;
       state.user = '';
       state.token = ''
+    },
+    updateLoading:(state, action)=>{
+      state.loading = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setState , logout } = userSlice.actions
+export const { setState , logout, updateLoading } = userSlice.actions
 
 export default userSlice.reducer

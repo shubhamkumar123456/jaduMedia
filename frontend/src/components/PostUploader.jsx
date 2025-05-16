@@ -3,10 +3,16 @@ import EmojiPicker from 'emoji-picker-react';
 import { MdEmojiEmotions } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const PostUploader = () => {
     const [showImoji, setshowImoji] = useState(false);
     const [selectedFiles, setselectedFiles] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    let userSlice = useSelector((state)=>state.users);
+    console.log(userSlice)
     let inputRef = useRef()
     // const [inputValue, setinputValue] = useState('');
 
@@ -41,6 +47,7 @@ const PostUploader = () => {
     console.log("preset = ",import.meta.env.VITE_UPLOAD_PRESET)
 
     const handleSubmit = async()=>{
+      setLoading(true)
         let arr = [...selectedFiles];
         
       let ansArr =  arr.map(async(ele,i)=>{
@@ -61,9 +68,29 @@ const PostUploader = () => {
         }
 
         console.log(obj)
+      try {
+          let res = await axios.post('http://localhost:8090/posts/create',obj,{
+          headers:{
+            'Authorization':userSlice.token
+          }
+        })
+        let data = res.data
+
+        if(res.status===201 || res.status==200){
+            toast.success(data.msg)
+
+            inputRef.current.value = '';
+            setselectedFiles('')
+          setLoading(false)
+        }
+      } catch (error) {
+        console.log(error)
+          setLoading(false)
+      }
     }
   return (
     <div className=''>
+     {loading===true && <div className='loaderContainer'><div class="loader"></div> <p>Loading...</p></div>}
         <div className='w-[400px] relative h-max p-3 mt-[30px] rounded-md border m-auto'>
             <div className='flex gap-2 items-center'>
                 <img src="https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg" alt=""  className='w-12 h-12 rounded-full'/>

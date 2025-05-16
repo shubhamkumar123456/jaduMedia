@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
 import { ToastContainer } from 'react-toastify'
-import FormikLogin from './pages/FormikLogin'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ForgetPassword from './pages/ForgetPassword'
+import { setUpInterceptors } from './features/AxiosInstace'
 
 const App = () => {
 
   let userSlice = useSelector((state)=>state.users);
   console.log(userSlice)
   let login = userSlice.login  // false
+  let dispatch = useDispatch()
+
+  // useEffect(()=>{
+  //   setUpInterceptors(dispatch)
+  // },[dispatch])
 
   return (
     <div>
