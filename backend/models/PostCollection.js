@@ -6,7 +6,8 @@ const postSchema = new mongoose.Schema({
     },
     files:[],
     userId:{
-        type:String
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'users'
     }
 },{timestamps:true});
 

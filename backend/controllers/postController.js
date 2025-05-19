@@ -21,7 +21,29 @@ const deletePost = async (req, res) => {
   res.send("delete post working");
 };
 
-export { createPost, deletePost };
+
+const yourPosts = async(req,res)=>{
+    try {
+      const  {_id}  = req.user;
+
+    let posts = await postsColelction.find({userId: _id}).populate({path:'userId',select:'name profilePic'})
+    res.status(200).json({posts})
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    } 
+}
+
+
+const allPosts = async(req , res) =>{
+  try {
+      let posts = await postsColelction.find().populate({path:'userId',select:'name profilePic'})
+    res.status(200).json({posts})
+  } catch (error) {
+     res.status(500).json({error:error.message})
+  }
+}
+
+export { createPost, deletePost ,yourPosts, allPosts };
 
 
 

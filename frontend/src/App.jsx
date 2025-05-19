@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import ForgetPassword from './pages/ForgetPassword'
 import { setUpInterceptors } from './features/AxiosInstace'
+import UserProfile from './pages/UserProfile'
 
 const App = () => {
 
@@ -23,11 +24,12 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-      <Navbar/>
+       <Navbar/>
           <Routes>
               <Route path='/' element={login===true ? <Home/> : <Navigate to={'/login'}/>}/>
               <Route path='/signup' element={login===false ? <Signup/> : <Navigate to={'/'}/>}/>
               <Route path='/login' element={login===false ? <Login/> : <Navigate to={'/'}/>}/>
+              <Route path='/userProfile' element={login===true ? <UserProfile/> : <Navigate to={'/login'}/>}/>
               <Route path='/forgetPassword' element={login===false ? <ForgetPassword/> : <Navigate to={'/'}/>}/>
           </Routes>
           <ToastContainer/>

@@ -26,7 +26,7 @@ const Navbar = () => {
         <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/'}>Home</Link></li>
         <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/login'}>Login</Link></li>
         <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/signup'}>Signup</Link></li>
-        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/profile'}>Profile</Link></li>
+        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/userProfile'}>Profile</Link></li>
         <li onClick={()=>{dispatch(logout()) ; setshowUl(false)}} className='px-6 py-2 cursor-pointer'>Logout</li>
       </ul>}
      </div>
