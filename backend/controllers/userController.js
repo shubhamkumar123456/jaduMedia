@@ -81,7 +81,7 @@ const updateUser = async (req, res) => {
   try {
     console.log("req.user = ", req.user);
     const { _id } = req.user;
-    const { name, password } = req.body;
+    const { name, password ,coverPic , profilePic } = req.body;
 
     if (password) {
       var hashPassword = bcrypt.hashSync(password, salt);
@@ -89,6 +89,8 @@ const updateUser = async (req, res) => {
     let user = await userCollection.findByIdAndUpdate(_id, {
       name: name,
       password: hashPassword,
+      coverPic,
+      profilePic
     });
     res.status(200).json({ msg: "user updated successfully" });
   } catch (error) {

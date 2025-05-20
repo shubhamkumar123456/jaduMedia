@@ -28,11 +28,23 @@ export const userSlice = createSlice({
     },
     updateLoading:(state, action)=>{
       state.loading = action.payload
+    },
+    updatePic:(state, action)=>{
+      let {name,url} = action.payload;
+      let copyObj = {...userData}
+      let user = {...copyObj.user, [name]:url}
+      copyObj.user = user
+   
+    //   copyObj.user[name] = url;
+     localStorage.setItem('jaduMedia',JSON.stringify(copyObj))
+
+        state.user[name] = url;
+
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setState , logout, updateLoading } = userSlice.actions
+export const { setState , logout, updateLoading, updatePic } = userSlice.actions
 
 export default userSlice.reducer
