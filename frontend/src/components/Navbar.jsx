@@ -13,7 +13,7 @@ const Navbar = () => {
         setshowUl(!showUl)
     }
   return (
-    <div className='sticky top-0 left-0 px-10 right-0 flex bg-black h-[65px] items-center justify-between text-white'>
+    <div className='sticky top-0 left-0 px-10 right-0 z-50 flex bg-black h-[65px] items-center justify-between text-white'>
      <div className='flex items-center gap-1 '>
         <img className='w-30' src="/logo.png" alt="" />
         {/* <h1>Social-App</h1> */}
