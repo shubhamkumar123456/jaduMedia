@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCamera } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePic } from '../redux/userSlice';
+import PostCard from '../components/PostCard';
 
 const UserProfile = () => {
-  
+
+  const [allPosts, setallPosts] = useState([]);
       let userSlice = useSelector((state)=>state.users);
       console.log(userSlice)
       let user = userSlice?.user
@@ -39,6 +41,21 @@ const UserProfile = () => {
          
           
       }
+
+
+      const yourPosts = async()=>{
+        let res = await axios.get('http://localhost:8090/posts/yourPost',{
+          headers:{
+            'Authorization': userSlice.token
+          }
+        })
+        console.log(res.data)
+        setallPosts(res.data.posts)
+      }
+
+      useEffect(()=>{
+        yourPosts()
+      },[userSlice?.token])
   return (
     <div className='container w-[90%] m-auto'>
         <div className='w-full h-[50vh] relative'>
@@ -59,6 +76,14 @@ const UserProfile = () => {
             </div>
             </div>
         </div>
+
+         <div className="flex w-[400px] m-auto mt-[180px] flex-col gap-2">
+              {
+                allPosts.map((ele,i)=>{
+                  return <PostCard key={ele._id} ele ={ele}/>
+                })
+              }
+            </div>
     </div>
   )
 }

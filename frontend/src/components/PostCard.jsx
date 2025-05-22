@@ -88,32 +88,12 @@ export default function PostCard(props) {
           <IconButton variant="plain" color="neutral" size="sm">
             <ModeCommentOutlined />
           </IconButton>
-          <IconButton variant="plain" color="neutral" size="sm">
+          {/* <IconButton variant="plain" color="neutral" size="sm">
             <SendOutlined />
-          </IconButton>
+          </IconButton> */}
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mx: 'auto' }}>
-          {[...Array(5)].map((_, index) => (
-            <Box
-              key={index}
-              sx={[
-                {
-                  borderRadius: '50%',
-                  width: `max(${6 - index}px, 3px)`,
-                  height: `max(${6 - index}px, 3px)`,
-                },
-                index === 0
-                  ? { bgcolor: 'primary.solidBg' }
-                  : { bgcolor: 'background.level3' },
-              ]}
-            />
-          ))}
-        </Box>
-        <Box sx={{ width: 0, display: 'flex', flexDirection: 'row-reverse' }}>
-          <IconButton variant="plain" color="neutral" size="sm">
-            <BookmarkBorderRoundedIcon />
-          </IconButton>
-        </Box>
+  
+      
       </CardContent>
       <CardContent>
         <Link
