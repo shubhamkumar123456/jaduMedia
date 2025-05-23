@@ -45,7 +45,31 @@ const allPosts = async (req, res) => {
   }
 }
 
-export { createPost, deletePost, yourPosts, allPosts };
+
+const likePost = async(req,res)=>{
+    try {
+       const { _id } = req.user;
+      const {postId} = req.params
+
+      let post = await postsColelction.findById(postId);  // {}
+      if(post.likes.includes(_id)){
+        post.likes.pull(_id);
+        await post.save()
+        res.status(200).json({msg:"post disliked successfully"})
+      }
+      else{
+       post.likes.push(_id);
+      await post.save()
+      res.status(200).json({msg:"post liked successfully"})
+      }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ 
+
+} 
+
+export { createPost, deletePost, yourPosts, allPosts , likePost };
 
 
 

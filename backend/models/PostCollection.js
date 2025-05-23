@@ -11,5 +11,26 @@ const postSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
+
+postSchema.add({
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'users'
+        }
+    ],
+    comment:[
+        {
+            userId:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"users"
+            },
+            text:{
+                type:String
+            }
+        }
+    ]
+})
+
 const posts  = mongoose.model('posts', postSchema);
 export default posts

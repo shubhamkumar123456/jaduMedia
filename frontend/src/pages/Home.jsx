@@ -23,10 +23,10 @@ const Home = () => {
     <div>
       <PostUploader />
 
-      <div className="flex w-[400px] m-auto flex-col gap-2">
+      <div className="flex w-[400px] m-auto mt-[100px] flex-col gap-2">
         {
           AllPost.map((ele,i)=>{
-            return <PostCard key={ele._id} ele ={ele}/>
+            return <PostCard   getAllPosts={  getAllPosts}  key={ele._id} ele ={ele}/>
           })
         }
       </div>

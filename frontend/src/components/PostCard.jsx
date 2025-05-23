@@ -20,10 +20,16 @@ import { format } from 'timeago.js';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { FaHeart } from "react-icons/fa";
 
 export default function PostCard(props) {
     let obj = props.ele
     console.log(obj)
+
+    let userSlice = useSelector((state)=>state.users)
 
      const settings = {
     dots: true,
@@ -32,6 +38,24 @@ export default function PostCard(props) {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+
+
+  const likeOrDislikePost = async()=>{
+   try {
+     let res = await axios.put(`http://localhost:8090/posts/likes/${obj._id}`,{},{
+      headers:{
+        'Authorization':userSlice.token
+      }
+    })
+    let data = res.data
+    if(res.status == 200){
+      toast.success(data.msg)
+        props.getAllPosts()
+    }
+   } catch (error) {
+      console.log(error)
+   }
+  }
   return (
     <Card
       variant="outlined"
@@ -82,9 +106,19 @@ export default function PostCard(props) {
       </CardOverflow>
       <CardContent orientation="horizontal" sx={{ alignItems: 'center', mx: -1 }}>
         <Box sx={{ width: 0, display: 'flex', gap: 0.5 }}>
-          <IconButton variant="plain" color="neutral" size="sm">
+          {
+            obj.likes.includes(userSlice.user._id) ?    <IconButton onClick={likeOrDislikePost} variant="plain" color="neutral" size="sm">
+            <FaHeart color='red' size={22}/>
+          </IconButton>
+
+          :
+
+            <IconButton onClick={likeOrDislikePost} variant="plain" color="neutral" size="sm">
             <FavoriteBorder />
           </IconButton>
+          }
+        
+       
           <IconButton variant="plain" color="neutral" size="sm">
             <ModeCommentOutlined />
           </IconButton>
@@ -102,7 +136,7 @@ export default function PostCard(props) {
           textColor="text.primary"
           sx={{ fontSize: 'sm', fontWeight: 'lg' }}
         >
-          8.1M Likes
+          {obj.likes.length}  {obj.likes.length > 1000000 ? 'M': obj.likes.length>1000? 'K' :''}  Likes
         </Link>
         <Typography sx={{ fontSize: 'sm' }}>
          
