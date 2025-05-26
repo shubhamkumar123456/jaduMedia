@@ -27,6 +27,10 @@ postSchema.add({
             },
             text:{
                 type:String
+            },
+            createdAt:{
+                type:Date,
+                default:Date.now
             }
         }
     ]

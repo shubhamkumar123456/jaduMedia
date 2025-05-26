@@ -68,7 +68,7 @@ const UserProfile = () => {
 
             <div className='w-[200px] bottom-[0%] left-[5%] translate-y-[50%] h-[200px] rounded-full absolute bg-white border'>
                <img className='w-full h-full rounded-full object-cover' src={user.profilePic} alt="" /> 
-               <p className='text-center text-xl font-semibold'>John carter</p>
+               <p className='text-center text-xl font-semibold'>{userSlice.user.name}</p>
 
                <div className='absolute top-0 right-6'>
                 <label htmlFor="cover" > <FaCamera size={30} color='white'/></label>
