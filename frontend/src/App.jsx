@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ForgetPassword from './pages/ForgetPassword'
 import { setUpInterceptors } from './features/AxiosInstace'
 import UserProfile from './pages/UserProfile'
+import FriendProfile from './pages/FriendProfile'
 
 const App = () => {
 
@@ -31,10 +32,13 @@ const App = () => {
               <Route path='/login' element={login===false ? <Login/> : <Navigate to={'/'}/>}/>
               <Route path='/userProfile' element={login===true ? <UserProfile/> : <Navigate to={'/login'}/>}/>
               <Route path='/forgetPassword' element={login===false ? <ForgetPassword/> : <Navigate to={'/'}/>}/>
+              <Route path='/friendProfile' element={<FriendProfile/>}/>
           </Routes>
           <ToastContainer/>
       </BrowserRouter>
       {/* <FormikLogin/> */}
+
+      {/* <h1 className='bg-green-400 hover:bg-black sm:bg-amber-400 md:bg-blue-400 lg:bg-[crimson] xl:bg-amber-950'>hello</h1> */}
     </div>
   )
 }

@@ -184,6 +184,25 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const searchFriend = async(req,res)=>{
+   try {
+     let {name} = req.query
+    // let regex = new RegExp();
+    if(name.length>0){
+    let users = await userCollection.find({name:new RegExp(name)})
+    res.status(200).json(users)
+    }
+    else{
+      res.status(200).json([])
+    }
+
+   
+   } catch (error) {
+      res.status(500).json({error:error.message})
+   }
+
+}
+
 export {
   registerUser,
   loginUser,
@@ -192,6 +211,7 @@ export {
   resetPassword,
   deleteUser,
   forgetPassword,
+  searchFriend
 };
 
 //  hash  --> not reversable  --> hashing

@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUser, forgetPassword, loginUser, resetPassword,registerUser, updateUser, updatePassword } from '../controllers/userController.js';
+import { deleteUser, forgetPassword, loginUser, resetPassword,registerUser, updateUser, updatePassword, searchFriend } from '../controllers/userController.js';
 import checkToken from '../middleware/checkToken.js';
 const router  = express.Router();
 
@@ -13,6 +13,8 @@ router.delete('/delete',checkToken,deleteUser)
 router.post('/forgetPassword',forgetPassword)
 router.get('/resetPassword/:resetToken', resetPassword);
 router.put('/updatePassword/:resetToken',updatePassword)
+
+router.get('/searchFriends',checkToken,searchFriend)
 
 
 export default router
