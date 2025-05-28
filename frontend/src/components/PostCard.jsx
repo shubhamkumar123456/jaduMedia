@@ -26,11 +26,14 @@ import { toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { Button, Modal } from 'antd';
 import { MdDeleteOutline } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 export default function PostCard(props) {
   let obj = props.ele
   console.log(obj)
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  let navigate = useNavigate()
 
   const showModal = () => {
 
@@ -103,7 +106,7 @@ export default function PostCard(props) {
         variant="outlined"
         sx={{ minWidth: 300, '--Card-radius': (theme) => theme.vars.radius.xs }}
       >
-        <CardContent orientation="horizontal" sx={{ alignItems: 'center', gap: 1 }}>
+        <CardContent  orientation="horizontal" sx={{ alignItems: 'center', gap: 1 }}>
           <Box
             sx={{
               position: 'relative',
@@ -127,7 +130,7 @@ export default function PostCard(props) {
               sx={{ border: '2px solid', borderColor: 'background.body' }}
             />
           </Box>
-          <Typography sx={{ fontWeight: 'lg' }}>{obj.userId.name}</Typography>
+          <Typography onClick={()=>navigate( userSlice.user._id===obj.userId._id?'/userProfile':'/friendProfile',{state:obj.userId._id})}  sx={{ fontWeight: 'lg' }}>{obj.userId.name}</Typography>
           <IconButton variant="plain" color="neutral" size="sm" sx={{ ml: 'auto' }}>
             <MoreHoriz />
           </IconButton>

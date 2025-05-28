@@ -43,7 +43,7 @@ const Navbar = () => {
       <input type="text" onChange={handleSearch} className='border px-4 py-2 rounded'  placeholder='search a friend..'/>
       <div className='bg-black text-white absolute top-full w-full'>
         {searchedFriends.map((ele)=>{
-          return <Link className='flex gap-4 items-center border-b px-2 py-3'>
+          return <Link onClick={()=>setsearchedFriends([])} to={ userSlice.user._id===ele._id ?'/userProfile' : `/friendProfile?name=${ele.name}&id=${ele._id}`} state = {ele._id} className='flex gap-4 items-center border-b px-2 py-3'>
                 <img src={ele.profilePic} className='w-11 h-11 rounded-full border border-blue-400' alt="" />
                 <p>{ele.name}</p>
             </Link>

@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { PiImagesLight } from "react-icons/pi";
 
 const PostUploader = () => {
     const [showImoji, setshowImoji] = useState(false);
@@ -93,7 +94,7 @@ const PostUploader = () => {
      {loading===true && <div className='loaderContainer'><div class="loader"></div> <p>Loading...</p></div>}
         <div className='w-[400px] relative h-max p-3 mt-[30px] rounded-md border m-auto'>
             <div className='flex gap-2 items-center'>
-                <img src="https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg" alt=""  className='w-12 h-12 rounded-full'/>
+                <img src="https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg" alt=""  className='w-14 h-14 rounded-full'/>
                 <textarea ref={inputRef} className='border w-full p-3 rounded-xl' name="" id="" placeholder="what's in your mind.."></textarea>
             </div>
 
@@ -116,7 +117,7 @@ const PostUploader = () => {
 
             <div className='mt-5 flex justify-between gap-4 items-center'>
                 <input   multiple onChange={handleChanger} hidden id='files' type="file" />
-                <label className='bg-green-800 text-white rounded-md px-4 py-2 text-center' htmlFor="files">Image/Video</label>
+                <label className=' text-black  text-center flex justify-center items-center flex-col' htmlFor="files"> <PiImagesLight size={28}/> <span className='text-[14px]'>Image / video</span> </label>
 
 
                 <MdEmojiEmotions  onClick={()=>setshowImoji(!showImoji)} size={25} color='green'/>

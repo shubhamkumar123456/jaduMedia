@@ -1,4 +1,5 @@
 import userCollection from "../models/userCollection.js";
+import postCollection from '../models/PostCollection.js'
 import bcrypt from "bcryptjs";
 const salt = bcrypt.genSaltSync(10);
 import jwt from "jsonwebtoken";
@@ -203,6 +204,17 @@ const searchFriend = async(req,res)=>{
 
 }
 
+
+const getFirend = async(req,res)=>{
+
+    const {friendId} = req.params;
+    const friend = await userCollection.findById(friendId).select('-password');
+    let friendPosts  =  await postCollection.find({userId:friendId}).populate({path:"comment", populate:{path:'userId',select:'name profilePic'}});
+
+    res.status(200).json({msg:"data fetched successfully", friend, friendPosts});
+
+}
+
 export {
   registerUser,
   loginUser,
@@ -211,7 +223,8 @@ export {
   resetPassword,
   deleteUser,
   forgetPassword,
-  searchFriend
+  searchFriend,
+  getFirend
 };
 
 //  hash  --> not reversable  --> hashing
