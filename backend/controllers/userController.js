@@ -209,10 +209,38 @@ const getFirend = async(req,res)=>{
 
     const {friendId} = req.params;
     const friend = await userCollection.findById(friendId).select('-password');
-    let friendPosts  =  await postCollection.find({userId:friendId}).populate({path:"comment", populate:{path:'userId',select:'name profilePic'}});
+    let friendPosts  =  await postCollection.find({userId:friendId}).populate({path:"userId",select:"name profilePic"}).populate({path:"comment", populate:{path:'userId',select:'name profilePic'}});
 
     res.status(200).json({msg:"data fetched successfully", friend, friendPosts});
 
+}
+
+
+const followUnfollowUser = async(req,res)=>{
+  try {
+     const { _id } = req.user;
+   const friendId = req.params.friendId;
+
+   let user = await userCollection.findById(_id)  // your details
+   let friend = await userCollection.findById(friendId)  // friend details
+
+   if(user.followings.includes(friendId) && friend.followers.includes(_id)){
+      user.followings.pull(friendId)
+      friend.followers.pull(_id);
+      await user.save()
+      await friend.save()
+      res.status(200).json({msg:"user unfollow successfully"})
+   }
+   else{
+     user.followings.push(friendId)
+      friend.followers.push(_id);
+      await user.save()
+      await friend.save()
+      res.status(200).json({msg:"user follow successfully"})
+   }
+  } catch (error) {
+      res.status(500).json({error:error.message})
+  }
 }
 
 export {
@@ -224,7 +252,8 @@ export {
   deleteUser,
   forgetPassword,
   searchFriend,
-  getFirend
+  getFirend,
+  followUnfollowUser
 };
 
 //  hash  --> not reversable  --> hashing

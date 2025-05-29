@@ -12,6 +12,8 @@ const Navbar = () => {
     let userSlice = useSelector((state)=>state.users)
     console.log(userSlice)
 
+    let login = userSlice.login
+
     let dispatch = useDispatch()
 
     const handleShowUl = ()=>{
@@ -39,7 +41,7 @@ const Navbar = () => {
         {/* <h1>Social-App</h1> */}
      </div>
 
-     <form className='relative'>
+  {login===true &&   <form className='relative'>
       <input type="text" onChange={handleSearch} className='border px-4 py-2 rounded'  placeholder='search a friend..'/>
       <div className='bg-black text-white absolute top-full w-full'>
         {searchedFriends.map((ele)=>{
@@ -50,16 +52,16 @@ const Navbar = () => {
         })}
       </div>
      </form>
-
+}
      <div className='h-full relative flex items-center'>
         <img onClick={handleShowUl} className='w-12 cursor-pointer h-12 rounded-full border border-amber-300' src={userSlice?.user? userSlice.user.profilePic:"https://as1.ftcdn.net/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg"} alt="" />
 
        {showUl && <ul className='flex flex-col bg-black text-white absolute top-full -right-1/2'>
-        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/'}>Home</Link></li>
-        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/login'}>Login</Link></li>
-        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/signup'}>Signup</Link></li>
-        <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/userProfile'}>Profile</Link></li>
-        <li onClick={()=>{dispatch(logout()) ; setshowUl(false)}} className='px-6 py-2 cursor-pointer'>Logout</li>
+      { login ===true && <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/'}>Home</Link></li>}
+      { login ===false &&  <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/login'}>Login</Link></li>}
+      {login ===false &&  <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/signup'}>Signup</Link></li>}
+      {login ===true &&  <li onClick={()=>{ setshowUl(false)}}  className='px-6 py-2 cursor-pointer'><Link to={'/userProfile'}>Profile</Link></li>}
+      {login === true &&  <li onClick={()=>{dispatch(logout()) ; setshowUl(false)}} className='px-6 py-2 cursor-pointer'>Logout</li>}
       </ul>}
      </div>
       

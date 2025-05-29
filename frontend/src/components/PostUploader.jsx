@@ -92,10 +92,10 @@ const PostUploader = () => {
   return (
     <div className=''>
      {loading===true && <div className='loaderContainer'><div class="loader"></div> <p>Loading...</p></div>}
-        <div className='w-[400px] relative h-max p-3 mt-[30px] rounded-md border m-auto'>
+        <div className='w-[400px] backdrop: bg-[url(https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Mountain-Landscape-Simple-Nature-Background-Image.jpg)] bg-cover bg-center text-white relative h-max p-3 mt-[30px] rounded-md border m-auto'>
             <div className='flex gap-2 items-center'>
                 <img src="https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg" alt=""  className='w-14 h-14 rounded-full'/>
-                <textarea ref={inputRef} className='border w-full p-3 rounded-xl' name="" id="" placeholder="what's in your mind.."></textarea>
+                <textarea ref={inputRef} className='border text-black w-full p-3 rounded-xl' name="" id="" placeholder="what's in your mind.."></textarea>
             </div>
 
             {selectedFiles &&<div className='flex gap-2 flex-wrap my-6 '>
@@ -117,10 +117,10 @@ const PostUploader = () => {
 
             <div className='mt-5 flex justify-between gap-4 items-center'>
                 <input   multiple onChange={handleChanger} hidden id='files' type="file" />
-                <label className=' text-black  text-center flex justify-center items-center flex-col' htmlFor="files"> <PiImagesLight size={28}/> <span className='text-[14px]'>Image / video</span> </label>
+                <label className=' text-white  text-center flex justify-center items-center flex-col' htmlFor="files"> <PiImagesLight size={28}/> <span className='text-[14px]'>Image / video</span> </label>
 
 
-                <MdEmojiEmotions  onClick={()=>setshowImoji(!showImoji)} size={25} color='green'/>
+                <MdEmojiEmotions  onClick={()=>setshowImoji(!showImoji)} size={25} color='white'/>
                 <button onClick={handleSubmit} className='bg-[#0f0f2e] hover:bg-[#29294b] text-white px-4 cursor-pointer py-2 rounded '>post</button>
             </div>
                 <EmojiPicker onEmojiClick={handleEmojiClicked} className='absolute' open={showImoji} searchDisabled={true}/>

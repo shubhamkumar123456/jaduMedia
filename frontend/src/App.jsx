@@ -32,7 +32,7 @@ const App = () => {
               <Route path='/login' element={login===false ? <Login/> : <Navigate to={'/'}/>}/>
               <Route path='/userProfile' element={login===true ? <UserProfile/> : <Navigate to={'/login'}/>}/>
               <Route path='/forgetPassword' element={login===false ? <ForgetPassword/> : <Navigate to={'/'}/>}/>
-              <Route path='/friendProfile' element={<FriendProfile/>}/>
+              <Route path='/friendProfile' element={login===true ?<FriendProfile/> : <Navigate to={'/login'}/>}/>
           </Routes>
           <ToastContainer/>
       </BrowserRouter>

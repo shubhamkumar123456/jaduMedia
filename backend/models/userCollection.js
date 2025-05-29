@@ -35,6 +35,18 @@ userSchema.add({
         type:String,
         default:"https://wallpapercave.com/wp/wp2657869.jpg"
     },
+    followers:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'users'
+        }
+    ],
+    followings:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'users'
+        }
+    ]
 })
 
 // const users = mongoose.model('collectionName' , structure)
