@@ -10,6 +10,7 @@ import ForgetPassword from './pages/ForgetPassword'
 import { setUpInterceptors } from './features/AxiosInstace'
 import UserProfile from './pages/UserProfile'
 import FriendProfile from './pages/FriendProfile'
+import { fetchUserByToken } from './redux/userSlice'
 
 const App = () => {
 
@@ -21,6 +22,13 @@ const App = () => {
   // useEffect(()=>{
   //   setUpInterceptors(dispatch)
   // },[dispatch])
+
+
+  useEffect(()=>{
+   if(userSlice.token){
+     dispatch(fetchUserByToken(userSlice.token))
+   }
+  },[userSlice.token])
 
   return (
     <div>

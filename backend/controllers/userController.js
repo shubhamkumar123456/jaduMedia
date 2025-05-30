@@ -64,7 +64,7 @@ const loginUser = async (req, res) => {
         let token = await jwt.sign({ _id: existingUser._id }, JWT_SECRET);
         res
           .status(200)
-          .json({ msg: "user log in successfully", user: existingUser, token });
+          .json({ msg: "user log in successfully", token });
       } else {
         return res.status(401).json({ msg: "incorrect password" });
       }
@@ -75,6 +75,17 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+const getLoggedInUSer = async(req,res)=>{
+   try {
+     const {_id} = req.user;
+    let user = await userCollection.findById(_id).select('-password');
+    res.status(200).json({user})
+   } catch (error) {
+    res.status(500).json({error:error.message})
+   }
+}
 
 // body ,  params , query , headers--> tokens
 
@@ -253,7 +264,8 @@ export {
   forgetPassword,
   searchFriend,
   getFirend,
-  followUnfollowUser
+  followUnfollowUser,
+  getLoggedInUSer
 };
 
 //  hash  --> not reversable  --> hashing

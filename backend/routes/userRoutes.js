@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUser, forgetPassword, loginUser, resetPassword,registerUser, updateUser, updatePassword, searchFriend, getFirend, followUnfollowUser } from '../controllers/userController.js';
+import { deleteUser, forgetPassword, loginUser, resetPassword,registerUser, updateUser, updatePassword, searchFriend, getFirend, followUnfollowUser, getLoggedInUSer } from '../controllers/userController.js';
 import checkToken from '../middleware/checkToken.js';
 const router  = express.Router();
 
@@ -7,6 +7,7 @@ const router  = express.Router();
 
 router.post('/create',registerUser)
 router.post('/login',loginUser)
+router.get('/loggedInUser',checkToken,getLoggedInUSer)
 router.put('/update',checkToken,updateUser)
 router.delete('/delete',checkToken,deleteUser)
 
