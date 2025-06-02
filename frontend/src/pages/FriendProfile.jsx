@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import { toast } from 'react-toastify';
 import { fetchUserByToken } from '../redux/userSlice';
@@ -9,6 +9,7 @@ import { fetchUserByToken } from '../redux/userSlice';
 const FriendProfile = () => {
 
   const [friend, setfriend] = useState('');
+  console.log(friend)
   const [friendPost, setfriendPost] = useState([]);
 
   let userSlice = useSelector((state)=>state.users);
@@ -58,11 +59,13 @@ const FriendProfile = () => {
   return (
     <div className='container m-auto'>
         <div className="cover relative w-full h-[50vh]">
-            <img className='w-full h-full' src={friend.coverPic} alt="" />
+            <img className='w-full h-full' src={friend?.coverPic} alt="" />
 
             <div className="profile bg-white border w-[200px] h-[200px] rounded-full absolute bottom-[-20%] left-[5%]">
-                <img className='w-full h-full rounded-full' src={friend.profilePic} alt="" />
-                <h3 className='text-center text-2xl font-semibold'>{friend.name}</h3>
+                <img className='w-full h-full rounded-full' src={friend?.profilePic} alt="" />
+       
+
+                <h3 className='text-center text-2xl font-semibold'>{friend?.name}</h3>
             </div>
         </div>
 
@@ -89,7 +92,7 @@ const FriendProfile = () => {
 
               
              
-              <button  className='px-5 cursor-pointer py-2 rounded-md bg-[#000028] text-white hover:bg-[blue]'>Chat</button>
+              <Link to={'/chat'}  className='px-5 cursor-pointer py-2 rounded-md bg-[#000028] text-white hover:bg-[blue]'>Chat</Link>
            
           </div>
 

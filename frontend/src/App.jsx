@@ -11,6 +11,7 @@ import { setUpInterceptors } from './features/AxiosInstace'
 import UserProfile from './pages/UserProfile'
 import FriendProfile from './pages/FriendProfile'
 import { fetchUserByToken } from './redux/userSlice'
+import Chat from './pages/Chat'
 
 const App = () => {
 
@@ -41,6 +42,7 @@ const App = () => {
               <Route path='/userProfile' element={login===true ? <UserProfile/> : <Navigate to={'/login'}/>}/>
               <Route path='/forgetPassword' element={login===false ? <ForgetPassword/> : <Navigate to={'/'}/>}/>
               <Route path='/friendProfile' element={login===true ?<FriendProfile/> : <Navigate to={'/login'}/>}/>
+              <Route path='/chat' element={login===true ?<Chat/> : <Navigate to={'/login'}/>}/>
           </Routes>
           <ToastContainer/>
       </BrowserRouter>

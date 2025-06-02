@@ -18,9 +18,11 @@ app.get('/',(req,res)=>{
 
 import userRoutes from './routes/userRoutes.js'
 import postRoutes from './routes/postRoutes.js'
+import messageRoutes from './routes/messageRoutes.js'
 
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
+app.use('/messages', messageRoutes)
 
 
 
